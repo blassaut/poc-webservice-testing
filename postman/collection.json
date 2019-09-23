@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "1b4463df-5631-42b9-853a-85443bba6447",
+		"name": "Testing JSON-Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Testing reading",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4006919a-acc8-49e8-b09d-70c6e6523d00",
+						"exec": [
+							"pm.test(\"Response time is less than 50 ms\", function (){",
+							"    pm.expect(pm.response.responseTime).to.be.below(600);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body contains 5 objects\", function(){",
+							"    let response = pm.response.json();",
+							"    pm.expect(response.length).to.be.equal(4);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/apps/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"apps",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Testing insertion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4006919a-acc8-49e8-b09d-70c6e6523d00",
+						"exec": [
+							"pm.test(\"Response time is less than 50 ms\", function (){",
+							"    pm.expect(pm.response.responseTime).to.be.below(600);",
+							"});",
+							"",
+							"pm.test(\"Successful POST request\", function(){",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});",
+							"",
+							"pm.test(\"Body contains 5 objects\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(5);",
+							"    pm.environment.set(\"id\", jsonData.id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\": \"\", \"title\": \"transverse\", \"qa\": \"adama\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/apps/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"apps",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Testing deletion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a5895d7-a6ce-4431-8342-92ed4b56f2bc",
+						"exec": [
+							"pm.test(\"Response time is less than 50 ms\", function (){",
+							"    pm.expect(pm.response.responseTime).to.be.below(600);",
+							"});",
+							"",
+							"pm.test(\"Successful DELETE request\", function(){",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							"",
+							"pm.environment.set(\"id\", pm.environment.get(\"id\") - 1);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/apps/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"apps",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Testing modification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eada0ade-6e53-45cc-9427-9aff5bc7ddb1",
+						"exec": [
+							"pm.test(\"Response time is less than 50 ms\", function (){\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Successful PUT request\", function(){\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.qa).to.eql(\"tao\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\": 4, \"title\": \"calcium\", \"qa\": \"tao\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/apps/4",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"apps",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Testing reset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eada0ade-6e53-45cc-9427-9aff5bc7ddb1",
+						"exec": [
+							"pm.test(\"Response time is less than 50 ms\", function (){\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Successful PUT request\", function(){\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.qa).to.eql(\"adama\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\": 4, \"title\": \"calcium\", \"qa\": \"adama\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/apps/4",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"apps",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

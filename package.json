@@ -1,0 +1,20 @@
+{
+  "name": "api-testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "newman:run": "newman run ./postman/collection.json -e ./postman/environment.json",
+    "json-server:run": "nohup json-server --watch ./postman/db.json >> json-server.log 2>&1 &"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@scm.ul.mediametrie.fr:LASSAUB/api-testing.git"
+  },
+  "author": "benjamin-lassaut",
+  "license": "ISC",
+  "dependencies": {
+    "newman": "4.5.4",
+    "json-server": "0.15.1"
+  }
+}
