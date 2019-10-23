@@ -2,22 +2,22 @@
   "apps": [
     {
       "id": 1,
-      "title": "qatool",
+      "title": "test1",
       "qa": "benjamin"
     },
     {
       "id": 2,
-      "title": "panel",
+      "title": "test2",
       "qa": "amaury"
     },
     {
       "id": 3,
-      "title": "mm2020",
+      "title": "test3",
       "qa": "joel"
     },
     {
       "id": 4,
-      "title": "calcium",
+      "title": "test4",
       "qa": "adama"
     }
   ],
