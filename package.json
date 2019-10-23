@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@scm.ul.mediametrie.fr:LASSAUB/api-testing.git"
+    "url": "https://github.com/blassaut/poc-webservice-testing.git"
   },
   "author": "benjamin-lassaut",
   "license": "ISC",
